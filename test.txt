@@ -1,0 +1,10 @@
+1+a{2,}(b|c)+cd
+
+#(xy|ab)(ef|efq)*
+#(xy|ab)ef(qef)
+#(xy|ab)ef(qef)w
+#(xy|ab)(ef|efq)*w
+#(xy|ab)(ef|efq)*w
+#(xy|ab)(ef|efq)*w
+
+#(ab(qef)*(w|qz))|(xy(efq)*(efw|z))
