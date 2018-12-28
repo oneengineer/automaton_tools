@@ -20,6 +20,7 @@ setup(
     description="some algorithm implementations for automaton and regular expressions",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    install_requires=["antlr4-python3-runtime"]
     url="https://github.com/oneengineer/automaton_tools",
     packages=["automaton_tools","automaton_tools.regex_parser","automaton_tools.regex_parser.grammar"]
 )
