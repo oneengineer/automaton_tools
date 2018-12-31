@@ -60,7 +60,8 @@ class CharAny(CharSet):
 
 class CharRange(CharSet):
     def __init__(self,charset,show:str = None, exclude = False):
-        assert type(charset) == set, 'CharRange only accept set'
+        if not (isinstance(charset,set) or isinstance(charset,frozenset)):
+            raise Exception('CharRange only accept set')
         self.show = show
         self.exclude = exclude
         self.charset = frozenset(charset)

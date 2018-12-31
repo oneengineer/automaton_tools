@@ -109,7 +109,8 @@ class AutomatonVisotor(RegexVisitor):
         return AutomatonBuild.charset(charset)
 
     def visitSingleChar(self, ctx: RegexParser.SingleCharContext):
-        return CharRange(self.visit(ctx.char()))
+        single = self.visit(ctx.char())
+        return CharRange({single.char})
 
     def visitConcatRangeItem(self, ctx: RegexParser.ConcatRangeItemContext):
         a = self.visit(ctx.range_item(0))

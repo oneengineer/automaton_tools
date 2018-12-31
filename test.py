@@ -98,6 +98,7 @@ def test6():
     """test visitor"""
     myinput = ".+([a-c]+|2|3)*$"
     myinput = "[a-b]"
+    myinput = "[^bc23]+([b-c]+|2|3){3,}$"
     #myinput = "a(wy){1,}?"
     input = InputStream(myinput)
     lexer = RegexLexer(input)
@@ -107,7 +108,7 @@ def test6():
     root = parser.root()
     visitor = ASTVisitor()
     ast = visitor.visit(root)
-    print(ast,type(ast))
+    print(ast)
 
 test6()
 #test5()

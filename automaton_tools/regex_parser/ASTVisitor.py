@@ -7,9 +7,14 @@ from .AutomatonVisitor import AutomatonVisotor
 
 class ASTVisitor(AutomatonVisotor):
 
-    def visitRange(self, ctx: RegexParser.RangeContext):
-        r = self.visit(ctx.range_expr())
-        return CharsetAST(r)
+    def visitNegativeSet(self, ctx: RegexParser.NegativeSetContext):
+        charset = self.visit(ctx.range_item())
+        charset.exclude = True
+        return CharsetAST(charset)
+
+    def visitPositiveSet(self, ctx: RegexParser.PositiveSetContext):
+        charset = self.visit(ctx.range_item())
+        return CharsetAST(charset)
 
     def visitCharRule(self, ctx: RegexParser.CharRuleContext):
         c = self.visit(ctx.char())

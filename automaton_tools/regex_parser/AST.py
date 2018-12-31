@@ -10,7 +10,11 @@ class CharsetAST(AST):
         self.charset = charset
 
     def __repr__(self):
-        return str(self.charset) 
+        temp = str(self.charset)
+        if len(temp) == 1:
+            return temp
+        else :
+            return f"{{{temp}}}"
 
 class StarAST(AST):
     def __init__(self,content):
