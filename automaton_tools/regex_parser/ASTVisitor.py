@@ -7,6 +7,10 @@ from .AutomatonVisitor import AutomatonVisotor
 
 class ASTVisitor(AutomatonVisotor):
 
+    def visitRange(self, ctx: RegexParser.RangeContext):
+        r = self.visit(ctx.range_expr())
+        return CharsetAST(r)
+
     def visitCharRule(self, ctx: RegexParser.CharRuleContext):
         c = self.visit(ctx.char())
         assert isinstance(c,CharSet)

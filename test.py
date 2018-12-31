@@ -86,8 +86,30 @@ def test5():
     #myinput = "a(wy){1,}?"
     dfa = MyDFA.fromRegex(myinput)
     dfa.drawGraph("dfa")
-    print(dfa.match("xaabb23"))
+    print(dfa.match("ab"))
 
+    myinput = "[^a-b]+"
+    #myinput = "a(wy){1,}?"
+    dfa = MyDFA.fromRegex(myinput)
+    print(dfa.match("ab"))
+    print(dfa.match("xx"))
+
+def test6():
+    """test visitor"""
+    myinput = ".+([a-c]+|2|3)*$"
+    myinput = "[a-b]"
+    #myinput = "a(wy){1,}?"
+    input = InputStream(myinput)
+    lexer = RegexLexer(input)
+    stream = CommonTokenStream(lexer)
+    parser = RegexParser(stream)
+    parser.addErrorListener(AutomatonErrorListener)
+    root = parser.root()
+    visitor = ASTVisitor()
+    ast = visitor.visit(root)
+    print(ast,type(ast))
+
+test6()
 #test5()
 #test2()
-test3()
+#test3()

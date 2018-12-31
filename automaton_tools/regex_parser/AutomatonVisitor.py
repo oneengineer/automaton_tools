@@ -97,16 +97,16 @@ class AutomatonVisotor(RegexVisitor):
         return AutomatonBuild.charset(Char_START)
 
     def visitRange(self, ctx: RegexParser.RangeContext):
-        charset = self.visit(ctx.range_expr())
-        return AutomatonBuild.charset(charset)
+        return self.visit(ctx.range_expr())
 
     def visitNegativeSet(self, ctx: RegexParser.NegativeSetContext):
-        charset = self.visit(ctx.range_expr())
+        charset = self.visit(ctx.range_item())
         charset.exclude = True
         return AutomatonBuild.charset(charset)
 
     def visitPositiveSet(self, ctx: RegexParser.PositiveSetContext):
-        return self.visit(ctx.range_item())
+        charset = self.visit(ctx.range_item())
+        return AutomatonBuild.charset(charset)
 
     def visitSingleChar(self, ctx: RegexParser.SingleCharContext):
         return CharRange(self.visit(ctx.char()))
