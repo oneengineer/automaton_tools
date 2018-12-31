@@ -59,9 +59,10 @@ class CharAny(CharSet):
         return "."
 
 class CharRange(CharSet):
-    def __init__(self,charset,show:str = None):
+    def __init__(self,charset,show:str = None, exclude = False):
         assert type(charset) == set, 'CharRange only accept set'
         self.show = show
+        self.exclude = exclude
         self.charset = frozenset(charset)
 
     def __repr__(self):
@@ -78,7 +79,9 @@ class CharRange(CharSet):
         return hash(self.charset)
 
     def match(self, other):
-        return None
+        if  self.exclude:
+            return other not in self.charset
+        return other in self.charset
 
 class CharWord(CharSet):
     def __init__(self):

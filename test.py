@@ -62,6 +62,7 @@ def test2():
 def test3():
     myinput = "(ab(qef)*(w|qz))|(xy(efq)*(efw|z))"
     myinput = "a|(z+|b)|(cd)|(g|h)"
+    myinput = "a{2,3}[b-c]*"
     #myinput = "(ab(qef)*(w|qz))"
     dfa = MyDFA.fromRegex(myinput)
     dfa.drawGraph("dfa")
@@ -77,6 +78,16 @@ def test4():
     print(dfa.match("yuiyui"))
     print(dfa.match("abc12xxxxxqssyuiyui"))
 
-test4()
+
+def test5():
+    """test visitor"""
+    myinput = ".+([a-c]+|2|3)*$"
+    myinput = "[a-b]"
+    #myinput = "a(wy){1,}?"
+    dfa = MyDFA.fromRegex(myinput)
+    dfa.drawGraph("dfa")
+    print(dfa.match("xaabb23"))
+
+#test5()
 #test2()
-#test3()
+test3()

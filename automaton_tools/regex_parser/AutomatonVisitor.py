@@ -97,22 +97,32 @@ class AutomatonVisotor(RegexVisitor):
         return AutomatonBuild.charset(Char_START)
 
     def visitRange(self, ctx: RegexParser.RangeContext):
-        return self.visitRange(ctx)
+        charset = self.visit(ctx.range_expr())
+        return AutomatonBuild.charset(charset)
 
     def visitNegativeSet(self, ctx: RegexParser.NegativeSetContext):
-        return super().visitNegativeSet(ctx)
+        charset = self.visit(ctx.range_expr())
+        charset.exclude = True
+        return AutomatonBuild.charset(charset)
 
     def visitPositiveSet(self, ctx: RegexParser.PositiveSetContext):
-        return super().visitPositiveSet(ctx)
+        return self.visit(ctx.range_item())
 
     def visitSingleChar(self, ctx: RegexParser.SingleCharContext):
-        return super().visitSingleChar(ctx)
+        return CharRange(self.visit(ctx.char()))
 
     def visitConcatRangeItem(self, ctx: RegexParser.ConcatRangeItemContext):
-        return super().visitConcatRangeItem(ctx)
+        a = self.visit(ctx.range_item(0))
+        b = self.visit(ctx.range_item(1))
+        return CharRange(a.charset.union(b.charset))
 
     def visitCharRange(self, ctx: RegexParser.CharRangeContext):
-        return super().visitCharRange(ctx)
+        _from = self.visit(ctx.char(0))
+        _to = self.visit(ctx.char(1))
+        assert type(_from) is CharSet, "char range has to be a single character"
+        assert type(_to) is CharSet, "char range has to be a single character"
+        s = { chr(i) for i in range( ord(_from.char),ord(_to.char) + 1 ) }
+        return CharRange(s)
 
     def visitCharacter(self, ctx: RegexParser.CharacterContext):
         ch = CharSet(ctx.getText())
