@@ -44,7 +44,7 @@ class AutomatonVisotor(RegexVisitor):
         num = self.visit(ctx.digits())
         # create num subres the last one repeat itself
         import copy
-        arrs = [ copy.copy(subre) for _ in range(num) ] # deep copy necessary?
+        arrs = [ copy.deepcopy(subre) for _ in range(num) ] # deep copy necessary!
         t = arrs[0]
         arrs[-1] = AutomatonBuild.plus(arrs[-1])
         for i in range(len(arrs) - 1):
@@ -61,7 +61,7 @@ class AutomatonVisotor(RegexVisitor):
         num2 = self.visit(ctx.digits(1))
         # create num subres the last one repeat itself
         import copy
-        arrs = [copy.copy(subre) for _ in range(num1) ] # deep copy necessary?
+        arrs = [copy.deepcopy(subre) for _ in range(num1) ] # deep copy necessary! because of unique state
 
         mint = arrs[0]
         for i in range(len(arrs) - 1):

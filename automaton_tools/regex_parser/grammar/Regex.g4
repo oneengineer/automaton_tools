@@ -5,6 +5,8 @@ grammar Regex;
 
 root: re EOF;
 
+
+
 re
     : elementary op=('*'|'+')   #Closure
     | re '{' digits ',''}'      #RepeatMin
@@ -36,11 +38,6 @@ range_item
     ;
 
 
-char
-    : anyChar             #Character
-    | '\\' anyChar         #Escaped
-    ;
-
 digits: Digit+             #ManyDigits
     ;
 
@@ -48,12 +45,28 @@ Digit
     : '0' .. '9'
     ;
 
-anyChar
-    : Digit
-    | Letter
-    | ' '
+char
+    : EscapedChar         #Escaped
+    | anyChar             #Character
     ;
 
+
+EscapedChar: '\\' (Punctuation | Letter | Digit);
+
+anyChar
+    : Punctuation
+    | Letter
+    | Digit
+    ;
+
+
+Punctuation
+    : '\u0020'..'\u002f'
+    | '\u003a'..'\u0040'
+    | '\u003a'..'\u0040'
+    | '\u005b'..'\u0060'
+    | '\u007b'..'\u007e'
+    ;
 
 Letter
     :

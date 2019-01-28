@@ -1,5 +1,6 @@
 .idea/
 *.tokens
-
+build/
+dist/
 __pycache__
-
+*.egg-info/

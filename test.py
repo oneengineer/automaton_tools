@@ -110,7 +110,18 @@ def test6():
     ast = visitor.visit(root)
     print(ast)
 
-test6()
+def test_escape():
+    """test escapes"""
+    myinput = "\\^(abc)+\\&"
+    # myinput = "a(wy){1,}?"
+    dfa = MyDFA.fromRegex(myinput)
+    print(dfa.match("ab"))
+    print(dfa.match("abc"))
+    print(dfa.match("^abc&"))
+
+#test6()
 #test5()
 #test2()
 #test3()
+
+test_escape()

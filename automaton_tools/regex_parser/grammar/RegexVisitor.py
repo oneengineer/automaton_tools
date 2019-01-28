@@ -1,4 +1,4 @@
-# Generated from C:/work/py/automaton_tools/automaton_tools/regex_parser/grammar\Regex.g4 by ANTLR 4.7
+# Generated from C:/Users/xiaochent/Downloads/automaton_tools-master/automaton_tools/regex_parser/grammar\Regex.g4 by ANTLR 4.7
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .RegexParser import RegexParser
@@ -104,8 +104,8 @@ class RegexVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by RegexParser#Character.
-    def visitCharacter(self, ctx:RegexParser.CharacterContext):
+    # Visit a parse tree produced by RegexParser#ManyDigits.
+    def visitManyDigits(self, ctx:RegexParser.ManyDigitsContext):
         return self.visitChildren(ctx)
 
 
@@ -114,8 +114,8 @@ class RegexVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by RegexParser#ManyDigits.
-    def visitManyDigits(self, ctx:RegexParser.ManyDigitsContext):
+    # Visit a parse tree produced by RegexParser#Character.
+    def visitCharacter(self, ctx:RegexParser.CharacterContext):
         return self.visitChildren(ctx)
 
 

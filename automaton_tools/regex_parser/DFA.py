@@ -1,7 +1,3 @@
-from .grammar import *
-from .Automaton import *
-from .AutomatonVisitor import *
-from .AutomatonErrorListener import *
 from .NFA import *
 
 from collections import *
@@ -196,16 +192,7 @@ class DFA(Automaton):
 
     @staticmethod
     def fromRegex(regex):
-        input = InputStream(regex)
-        lexer = RegexLexer(input)
-        stream = CommonTokenStream(lexer)
-        parser = RegexParser(stream)
-        parser.addErrorListener(AutomatonErrorListener)
-        root = parser.root()
-        visitor = AutomatonVisotor()
-        automaton = visitor.visit(root)
-
-        nfa = NFA(automaton)
+        nfa = NFA.fromRegex(regex)
         dfa = DFA(nfa)
         #dfa = dfa.minimize()
         #dfa._compile()

@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="automaton_tools",
-    version="0.1.7",
+    version="0.1.8",
     author="oneengineer",
     author_email="oneengineer@gmail.com",
     description="some algorithm implementations for automaton and regular expressions",
